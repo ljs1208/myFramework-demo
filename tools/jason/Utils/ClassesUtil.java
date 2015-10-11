@@ -11,6 +11,7 @@ public class ClassesUtil {
 
 	private static ClassesUtil getClasses;
 	
+	private List<Class> classes = new ArrayList<Class>();
 
 	public static ClassesUtil getInstence() {
 		if (getClasses == null) {
@@ -25,7 +26,7 @@ public class ClassesUtil {
 		return getClasses;
 	}
 
-	public List findClass() throws Exception {
+	public List<Class> findClass() throws Exception {
 		Enumeration<URL> urls = Thread.currentThread().getContextClassLoader()
 				.getResources("/");
 		if (!urls.hasMoreElements()) {
@@ -74,13 +75,18 @@ public class ClassesUtil {
 				try {
 					//×ª»¯³ÉClass
 					Class clazz = Class.forName(className);
+					classes.add(clazz);
 				} catch (ClassNotFoundException e) {
 					e.printStackTrace();
 				}
-				 list.add(className);
+				// list.add(className);
 			}
 
 		}
 
+	}
+
+	public List<Class> queryClasses() {
+		return this.classes;
 	}
 }
